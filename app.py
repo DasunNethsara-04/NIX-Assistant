@@ -2,6 +2,7 @@ import speech_recognition as sr
 from tkinter import messagebox
 from tkinter import filedialog
 from  bs4 import BeautifulSoup
+import PySimpleGUI as sg
 import pyttsx3
 import datetime
 import os
@@ -41,9 +42,7 @@ def playSong():
 	path = f.read()
 	f.close()
 	files=os.listdir(path)
-	# print(path)
 	song = path+random.choice(files)
-	#os.startfile(song)
 	pygame.mixer.music.load(song)
 	pygame.mixer.music.play(loops=0)
 
@@ -85,10 +84,8 @@ def upTime():
 	days, hours = divmod(hours, 24)
 	if days == 0:
 		talk('Sir, You have used your computer for ' + str(hours) + ' hours, and ' + str(mins) + ' minuts.')
-		#messagebox.showinfo('JARVIS - PC Usage', f'PC Usage\n\nHours:\t\t{hours}\nMinutes:\t\t{mins}')
 	else:
 		talk('Sir, You have used your computer for ' + str(days) + ' days, ' + str(hours) + ' hours, and ' + str(mins) + ' minuts.')
-		#messagebox.showinfo('JARVIS - PC Usage', f'PC Usage\n\nDays:\t\t{days}\nHours:\t\t{hours}\nMinutes:\t\t{mins}')
 
 def take_screenshot():
 	#root.iconify()
@@ -100,16 +97,6 @@ def take_screenshot():
 	time.sleep(2)
 	talk('Here is your screenshot. I renamed the screenshot as, JARVIS - Screenshot.png')
 	os.startfile(os.environ['USERPROFILE']+'\\Pictures')
-
-def getTemp(location):
-	talk('Just a moment.')
-	search = f"temperature in {location}"
-	url = f'https://www.google.com/search?q={search}'
-	r = requests.get(url)
-	data = BeautifulSoup(r.text, "html.parser")
-	temp = data.find("div", class_="BNeawe").text
-	print(temp)
-	# talk(f'The Current {search} is {temp}.')
 
 def takeCommand():
 	r = sr.Recognizer()
@@ -214,7 +201,7 @@ def run():
 			f = open(f'{path}\\Python File.py', 'w')
 			f.write('# Made by MARK 68\n\n')
 			f.close()
-			#sg.popup_notify(f'File Created\nin {path}\\Python File.py', title='Done', icon='icon.png')
+			sg.popup_notify(f'File Created\nin {path}\\Python File.py', title='Done')
 		except:
 			talk('Error creating Python File')
 			pass
@@ -226,7 +213,7 @@ def run():
 			f = open(f'{path}\\HTML File.html', 'w')
 			f.write('<!DOCTYPE html>\n<html lang="en-us">\n<head>\n\t<title>HTML File</title>\n</head>\n<body>\n\t<h1>Made by MRAK 68</h1>\n</body>\n</html>')
 			f.close()
-			#sg.popup_notify(f'File Created\nin {path}\\HTML File.html', title='Done', icon='icon.png')
+			sg.popup_notify(f'File Created\nin {path}\\HTML File.html', title='Done')
 		except:
 			talk('Error creating HTML File')
 			pass
@@ -238,7 +225,7 @@ def run():
 			f = open(f'{path}\\Java_File.java', 'w')
 			f.write('public class Java_File\n{\t// Made by NIX\n\tpublic static void main(String args[])\n\t{\n\tSystem.out.println("Made by NIX AI Assistant");\n\t}\n}')
 			f.close()
-			#sg.popup_notify(f'File Created\nin {path}\\Java_File.java', title='Done', icon='icon.png')
+			sg.popup_notify(f'File Created\nin {path}\\Java_File.java', title='Done')
 		except:
 			talk('Error creating Java File')
 			pass
@@ -250,7 +237,7 @@ def run():
 			f = open(f'{path}\\style.css', 'w')
 			f.write('body\n{\n\tbackground-color: #ff0;\n}')
 			f.close()
-			#sg.popup_notify(f'File Created\nin {path}\\style.css', title='Done', icon='icon.png')
+			sg.popup_notify(f'File Created\nin {path}\\style.css', title='Done')
 		except:
 			talk('Error creating CSS document')
 			pass
@@ -262,7 +249,7 @@ def run():
 			f = open(f'{path}\\action.php', 'w')
 			f.write('// Made with NIX\n\necho "Made by NIX AI Assistant";')
 			f.close()
-			#sg.popup_notify(f'File Created\nin {path}\\action.php', title='Done', icon='icon.png')
+			sg.popup_notify(f'File Created\nin {path}\\action.php', title='Done')
 		except:
 			talk('Error creating PHP file')
 			pass
@@ -274,14 +261,10 @@ def run():
 			f = open(f'{path}\\script.js', 'w')
 			f.write('// Made with MARK 68\n\ndocument.write("Made by MARK 68");')
 			f.close()
-			#sg.popup_notify(f'File Created\nin {path}\\action.php', title='Done', icon='icon.png')
+			sg.popup_notify(f'File Created\nin {path}\\action.php', title='Done')
 		except:
 			talk('Error creating PHP file')
 			pass
-
-	elif 'temperature in ' in command:
-		location = command.replace("temperature in ", '')
-		getTemp(location)
 
 	elif 'volume up' in command:
 		talk('Increasing volume')
