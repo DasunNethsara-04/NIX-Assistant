@@ -1,7 +1,7 @@
 # NIX-Assistant
 NIX is a voice assistant created to make your computer easier to use just simply giving a voice command.
 
-# Attension
+# Attention
 - You should update the songList.txt file with your songs folder file path
 
 ## Details
