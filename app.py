@@ -1,3 +1,4 @@
+# imports
 import speech_recognition as sr
 from tkinter import messagebox
 from tkinter import filedialog
@@ -16,7 +17,7 @@ import pygame
 import random
 import wikipedia
 
-# text 2 speech
+# text 2 speech engine
 engine = pyttsx3.init()
 voice = engine.getProperty('voices')
 engine.setProperty('rate', 180)
@@ -155,11 +156,6 @@ def run():
 			talk("Make sure you have connected with the internet!")
 			print(e)
 			pass
-		
-	# elif '=' in command:
-	# 	ans = round(eval(command.replace('=', '')), 3)
-	# 	talk('The answer is ' + str(ans) + ' sir.')
-	# 	# sg.popup_notify(f'Answer is {ans}', title='Answer', icon='icon.png')
 
 	elif 'pc usage' in command:
 		upTime()
