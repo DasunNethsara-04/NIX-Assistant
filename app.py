@@ -14,6 +14,7 @@ import time
 import requests
 import pygame
 import random
+import wikipedia
 
 # text 2 speech
 engine = pyttsx3.init()
@@ -128,20 +129,33 @@ def run():
 	elif any([i in command for i in ['are you there', 'you up', 'you in there']]):
 		talk("For you sir, always")
 
-	elif "stop" in command:
-		talk("Shutting down JARVIS AI System")
+	elif "go to sleep" in command:
+		talk(" alright then, I am switching off")
 		exit(1)
 
 	elif 'date' in command:
 		talk('Today is ' + str(datetime.date.today()) + ' sir.')
 
 	elif 'who are you' in command:
-		talk('Hello sir! I am JARVIS. Your PC Assistant. JARVIS stands for, Just A Rather Very Intelligent System. I am here to assist you with the varieties tasks is best I can.')
+		talk('Hello sir! I am NIX. Your PC Assistant. I am here to assist you with the varieties tasks is best I can.')
 
 	elif 'version' in command:
-		talk('MARK 70 version 17.5.9')
-		# messagebox.showinfo("MARK", "MARK 70 (MRK LXVIII) PC Assisting Application\n\nApplication Version:\t70\nAssistant Version:\t\t17.5.9")
+		talk('NIX version 17.5.9')
+		# messagebox.showinfo("MARK", "NIX70 (MRK LXVIII) PC Assisting Application\n\nApplication Version:\t70\nAssistant Version:\t\t17.5.9")
 
+	elif "wikipedia" in command:
+		try:
+			talk(random.choice(ok) + ', Searching Wikipedia...') 
+			query = command.replace("wikipedia", "") 
+			results = wikipedia.summary(query, sentences=2) 
+			talk("According to Wikipedia, ") 
+			print(results) 
+			talk(results)
+		except Exception as e:
+			talk("Make sure you have connected with the internet!")
+			print(e)
+			pass
+		
 	# elif '=' in command:
 	# 	ans = round(eval(command.replace('=', '')), 3)
 	# 	talk('The answer is ' + str(ans) + ' sir.')
@@ -199,7 +213,7 @@ def run():
 			talk(random.choice(ok) + ', Creating Python File')
 			path = os.environ['USERPROFILE']+'\\Desktop'
 			f = open(f'{path}\\Python File.py', 'w')
-			f.write('# Made by MARK 68\n\n')
+			f.write('# Made by NIX\n\n')
 			f.close()
 			sg.popup_notify(f'File Created\nin {path}\\Python File.py', title='Done')
 		except:
@@ -259,7 +273,7 @@ def run():
 			talk(random.choice(ok) + ', Creating a JavaScript file.')
 			path = os.environ['USERPROFILE']+'\\Desktop'
 			f = open(f'{path}\\script.js', 'w')
-			f.write('// Made with MARK 68\n\ndocument.write("Made by MARK 68");')
+			f.write('// Made with NIX68\n\ndocument.write("Made by NIX68");')
 			f.close()
 			sg.popup_notify(f'File Created\nin {path}\\action.php', title='Done')
 		except:
