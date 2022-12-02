@@ -1,8 +1,7 @@
 # imports
 import speech_recognition as sr
-from tkinter import messagebox
-from tkinter import filedialog
-from  bs4 import BeautifulSoup
+# from tkinter import filedialog
+# from  bs4 import BeautifulSoup
 import PySimpleGUI as sg
 import pyttsx3
 import datetime
@@ -130,14 +129,14 @@ def run():
 	elif any([i in command for i in ['are you there', 'you up', 'you in there']]):
 		talk("For you sir, always")
 
-	elif "go to sleep" in command:
+	elif any([i in command for i in ['offline', 'go to sleep']]):
 		talk(" alright then, I am switching off")
 		exit(1)
 
-	elif 'date' in command:
+	elif any([i in command for i in ['today', 'date', 'day']]):
 		talk('Today is ' + str(datetime.date.today()) + ' sir.')
 
-	elif 'who are you' in command:
+	elif any([i in command for i in ['who are you', 'about you', 'yourself']]):
 		talk('Hello sir! I am NIX. Your PC Assistant. I am here to assist you with the varieties tasks is best I can.')
 
 	elif 'version' in command:
@@ -160,26 +159,26 @@ def run():
 	elif 'pc usage' in command:
 		upTime()
 
-	elif 'screenshot' in command:
+	elif any([i in command for i in ['take screenshot', 'take snapshot', 'screenshot']]):
 		take_screenshot()
 	
-	elif 'facebook' in command:
+	elif all([i in command for i in ['open', 'facebook']]):
 		talk('Opening Facebook from your web browser. Just a moment')
 		webbrowser.open('www.facebook.com')
 
-	elif 'instagram' in command:
+	elif all([i in command for i in ['open', 'instagram']]):
 		talk('Opening Instagram from your web browser. Just a moment')
 		webbrowser.open('www.instagram.com')
 
-	elif 'youtube' in command:
+	elif all([i in command for i in ['open', 'youtube']]):
 		talk('Opening YouTube from your web browser. Just a moment')
 		webbrowser.open('www.youtube.com')
 
-	elif 'stackoverflow' in command:
+	elif all([i in command for i in ['open', 'stackoverflow']]):
 		talk('Opening stackoverflow from your web browser. Just a moment')
 		webbrowser.open('www.stackoverflow.com')
 
-	elif 'google' in command:
+	elif all([i in command for i in ['open', 'google']]):
 		talk('Opening Google Search Engine. Just a moment')
 		webbrowser.open('www.google.com')
 
@@ -204,31 +203,31 @@ def run():
 		ram = round((psutil.virtual_memory().total) / (1024 ** 3), 2)
 		talk('Total System Memory is ' + str(ram) + 'GB')
 
-	elif 'create python file' in command:
+	elif all([i in command for i in ['create', 'python', 'file']]):
 		try:
 			talk(random.choice(ok) + ', Creating Python File')
 			path = os.environ['USERPROFILE']+'\\Desktop'
 			f = open(f'{path}\\Python File.py', 'w')
-			f.write('# Made by NIX\n\n')
+			f.write('# Made by NIX AI Assistant\n\n')
 			f.close()
 			sg.popup_notify(f'File Created\nin {path}\\Python File.py', title='Done')
 		except:
 			talk('Error creating Python File')
 			pass
 
-	elif 'create html file' in command:
+	elif all([i in command for i in ['create', 'html', 'file']]):
 		try:
 			talk(random.choice(ok) + ', Creating a HTML Document')
 			path = os.environ['USERPROFILE']+'\\Desktop'
 			f = open(f'{path}\\HTML File.html', 'w')
-			f.write('<!DOCTYPE html>\n<html lang="en-us">\n<head>\n\t<title>HTML File</title>\n</head>\n<body>\n\t<h1>Made by MRAK 68</h1>\n</body>\n</html>')
+			f.write('<!DOCTYPE html>\n<html lang="en-us">\n<head>\n\t<title>HTML File</title>\n</head>\n<body>\n\t<h1>Made by NIX AI Assistant</h1>\n</body>\n</html>')
 			f.close()
 			sg.popup_notify(f'File Created\nin {path}\\HTML File.html', title='Done')
 		except:
 			talk('Error creating HTML File')
 			pass
 
-	elif 'create java file' in command:
+	elif all([i in command for i in ['create', 'java', 'file']]):
 		try:
 			talk(random.choice(ok) + ', Creating a JAVA File')
 			path = os.environ['USERPROFILE']+'\\Desktop'
@@ -240,7 +239,7 @@ def run():
 			talk('Error creating Java File')
 			pass
 
-	elif 'create css sheet' in command:
+	elif all([i in command for i in ['create', 'css', 'file']]):
 		try:
 			talk(random.choice(ok) + ', Creating a CSS styling sheet document')
 			path = os.environ['USERPROFILE']+'\\Desktop'
@@ -252,7 +251,7 @@ def run():
 			talk('Error creating CSS document')
 			pass
 
-	elif 'create php file' in command:
+	elif all([i in command for i in ['create', 'php', 'file']]):
 		try:
 			talk(random.choice(ok) + ', Creating a PHP file. To run the file, you need to move this file into your server or server folder')
 			path = os.environ['USERPROFILE']+'\\Desktop'
@@ -264,67 +263,66 @@ def run():
 			talk('Error creating PHP file')
 			pass
 
-	elif 'create javascript file' in command:
+	elif all([i in command for i in ['create', 'python', 'file']]):
 		try:
 			talk(random.choice(ok) + ', Creating a JavaScript file.')
 			path = os.environ['USERPROFILE']+'\\Desktop'
 			f = open(f'{path}\\script.js', 'w')
-			f.write('// Made with NIX68\n\ndocument.write("Made by NIX68");')
+			f.write('// Made with NIX\n\ndocument.write("Made by NIX AI Assistant");')
 			f.close()
 			sg.popup_notify(f'File Created\nin {path}\\action.php', title='Done')
 		except:
 			talk('Error creating PHP file')
 			pass
 
-	elif 'volume up' in command:
+	elif any([i in command for i in ['volume up', 'increase volume']]):
 		talk('Increasing volume')
 		pyautogui.press("volumeup")
 		pyautogui.press("volumeup")
 		pyautogui.press("volumeup")
 		pyautogui.press("volumeup")
 
-	elif 'volume down' in command:
+	elif any([i in command for i in ['volume down', 'decrease volume']]):
 		talk('Decreasing volume')
 		pyautogui.press("volumedown")
 		pyautogui.press("volumedown")
 		pyautogui.press("volumedown")
 		pyautogui.press("volumedown")
 
-	elif 'mute/unmute' in command:
+	elif any([i in command for i in ['mute', 'unmute']]):
 		talk('Sound muted')
 		pyautogui.press("volumemute")
 
-	elif 'ip address' in command:
+	elif all([i in command for i in ['ip', 'address']]):
 		talk("Checking") 
 		try: 
 			ipAdd = requests.get('https://api.ipify.org').text 
 			talk("your ip adress is " + ipAdd)
-			messagebox.showinfo('IP Address', 'Your IP Address is: ' + ipAdd)
 		except Exception as e: 
 			talk("network is weak, please try again some time later")
 
-	elif 'play song' in command:
-		talk('The songs has been playing started. If you want to pause it, you can cant do it just selecting, Pause Song ')
-		playSong()
+	# elif 'play song' in command:
+	# 	talk('The songs has been playing started. If you want to pause it, you can cant do it just selecting, Pause Song ')
+	# 	playSong()
 
-	elif 'pause song' in command:
-		pauseSong()
+	# elif 'pause song' in command:
+	# 	pauseSong()
 
-	elif 'stop song' in command:
-		stopSong()
+	# elif 'stop song' in command:
+	# 	stopSong()
 
-	elif 'video' in command:
-		try:
-			talk('Please select a video file to play')
-			path = filedialog.askopenfilename(filetypes=[('MP4 Files', '*.mp4')], defaultextension=('.mp4'), title='Choose a Video to play')
-			if path == '':
-				talk('Process canceled by user.')
-				pass
-			else:
-				talk('Playing the video you selected! Just a moment')
-				os.startfile(os.path.join(path))
-		except:
-			pass
+	# elif 'video' in command:
+	# 	try:
+	# 		talk('Please select a video file to play')
+	# 		path = filedialog.askopenfilename(filetypes=[('MP4 Files', '*.mp4')], defaultextension=('.mp4'), title='Choose a Video to play')
+	# 		if path == '':
+	# 			talk('Process canceled by user.')
+	# 			pass
+	# 		else:
+	# 			talk('Playing the video you selected! Just a moment')
+	# 			os.startfile(os.path.join(path))
+	# 	except:
+	# 		pass
 
 	elif 'shutdown' in command:
 		talk('Closing JARVIS PC Assistant')
@@ -355,12 +353,12 @@ def run():
 			talk('This video will help you.')
 			webbrowser.open('https://youtu.beYU681US3NS8')
 
-	elif 'this pc' in command:
+	elif any([i in command for i in ['open file explorer', 'open explorer']]):
 		talk('Opening Windows Explorer')
 		path = 'C:\\Windows\\explorer.exe'
 		os.startfile(os.path.join(path))
 
-	elif 'notepad' in command:
+	elif all([i in command for i in ['open', 'notepad']]):
 		talk('Openin Windows Notepad')
 		path = 'C:\\WINDOWS\\system32\\notepad.exe'
 		os.startfile(os.path.join(path))
@@ -370,7 +368,7 @@ def run():
 		path = 'C:\\WINDOWS\\system32\\winver.exe'
 		os.startfile(os.path.join(path))
 
-	elif 'wordpad' in command:
+	elif all([i in command for i in ['open', 'wordpad']]):
 		talk('Opening Windows Wordpad')
 		path = 'C:\\Windows\\write.exe'
 		os.startfile(os.path.join(path))
@@ -385,22 +383,22 @@ def run():
 		path = 'C:\\WINDOWS\\System32\\appwiz.cpl'
 		os.startfile(os.path.join(path))
 
-	elif 'system info' in command:
+	elif all([i in command for i in ['open', 'system infomation']]):
 		talk('Getting System Information')
 		path = 'C:\\WINDOWS\\System32\\msinfo32.exe'
 		os.startfile(os.path.join(path))
 
-	elif 'command prompt' in command:
+	elif all([i in command for i in ['open', 'command prompt']]):
 		talk('Opening Windows Command Prompt')
 		path = 'C:\\WINDOWS\\System32\\cmd.exe'
 		os.startfile(os.path.join(path))
 
-	elif 'task manager' in command:
+	elif all([i in command for i in ['open', 'task manager']]):
 		talk('Opening Windows Task Manager')
 		path = 'C:\\WINDOWS\\System32\\taskmgr.exe'
 		os.startfile(os.path.join(path))
 
-	elif 'registry editor' in command:
+	elif all([i in command for i in ['open', 'registry editor']]):
 		talk('Opening Windows Registry Editor')
 		path = 'C:\\WINDOWS\\System32\\regedt32.exe'
 		os.startfile(os.path.join(path))
@@ -409,11 +407,11 @@ def run():
 		talk('Launching System Volume Mixer')
 		os.startfile('C:\\Windows\\System32\\SndVol.exe')
 
-	elif 'services' in command:
+	elif all([i in command for i in ['open', 'services']]):
 		talk('Opening Windows Services. Just a moment.')
 		os.startfile('C:\\Windows\\System32\\services.msc')
 
-	elif 'restore' in command:
+	elif all([i in command for i in ['open', 'system', 'restore']]):
 		try:
 			os.startfile('C:\\Windows\\System32\\rstrui.exe')
 			talk('Opening Windows System Restore Utility. Just a moment.')
@@ -428,19 +426,19 @@ def run():
 		except:
 			talk('Sorry sir, The Microsoft Malicious software Removal Tool is not available on your Operating System!')
 
-	elif 'defrag' in command:
+	elif any([i in command for i in ['open defrag tool', 'open defragmentation tool']]):
 		talk('Opening Windows Disk Optimizer')
 		os.startfile('C:\\Windows\\System32\\dfrgui.exe')
 
-	elif 'control panel' in command:
+	elif all([i in command for i in ['open', 'control panel']]):
 		talk('Opening Windows Control Panel')
 		os.startfile('C:\\Windows\\System32\\control.exe')
 
-	elif 'disk cleanup' in command:
+	elif any([i in command for i in ['open',  'disk cleanup tool']]):
 		talk('Opening Windows Disk Cleanup Tool')
 		os.startfile('C:\\Windows\\System32\\cleanmgr.exe')
 
-	elif 'character map' in command:
+	elif all([i in command for i in ['open', 'character map']]):
 		talk('Opening Windows Character Map')
 		os.startfile('C:\\Windows\\System32\\charmap.exe')
 
@@ -450,7 +448,7 @@ def run():
 
 	# application
 
-	elif 'vlc' in command:
+	elif all([i in command for i in ['open', 'vlc', 'player']]):
 		try:
 			path = 'C:\\Program Files\\VideoLAN\\VLC\\vlc.exe'
 			talk('Opening VLC Media Player')
@@ -467,7 +465,7 @@ def run():
 			talk('Sorry sir, you have not installed AIMP Music Player on your computer.')
 			pass
 
-	elif 'zoom' in command:
+	elif all([i in command for i in ['open', 'zoom']]):
 		try:
 			path = '\\AppData\\Roaming\\Zoom\\bin\\zoom.exe'
 			talk('Opening Zoom Cloud Meeting Service')
@@ -476,7 +474,7 @@ def run():
 			talk('Sorry sir, you have not installed Zoom Cloud Meeting Service on your computer')
 			pass
 
-	elif 'sublime text' in command:
+	elif all([i in command for i in ['open', 'sublime text']]):
 		try:
 			path = 'C:\\Program Files\\Sublime Text\\sublime_text.exe'
 			talk('Opening Sublime Text')
@@ -485,16 +483,7 @@ def run():
 			talk('Sorry sir, you have not installed Sublime Text on your computer')
 			pass
 
-	elif 'pyscripter' in command:
-		try:
-			path = 'C:\\Program Files\\PyScripter\\PyScripter.exe'
-			talk('Opening PyScripter IDE')
-			os.startfile(os.path.join(path))
-		except:
-			talk('Sorry sir, you have not installed PyScripter IDE on your computer')
-			pass
-
-	elif 'vs code' in command:
+	elif any([i in command for i in ['open visual studio code', 'vs code']]):
 		try:
 			path = '\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe'
 			talk('Opening Visual Studio Code')
@@ -502,8 +491,10 @@ def run():
 		except:
 			talk('Sorry sir, you have not installed Visual Studio Code on your computer')
 			pass
+	else:
+		talk("Command is not defined, please try another command.")
 
-talk("Jarvis AI System is now online")
+talk("NIX AI System is now online")
 
 while True:
 	run()
