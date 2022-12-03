@@ -1,7 +1,8 @@
 # imports
+from tkinter import *
+from tkinter import filedialog
 import speech_recognition as sr
-# from tkinter import filedialog
-# from  bs4 import BeautifulSoup
+from PIL import Image, ImageTk, ImageSequence
 import PySimpleGUI as sg
 import pyttsx3
 import datetime
@@ -12,9 +13,9 @@ import psutil
 import pyautogui
 import time
 import requests
-import pygame
 import random
 import wikipedia
+import PlaySound
 
 # text 2 speech engine
 engine = pyttsx3.init()
@@ -23,7 +24,6 @@ engine.setProperty('rate', 180)
 engine.setProperty('volume', 2.0)
 engine.setProperty('voice', voice[2].id)
 
-pygame.init()
 
 # reply methods
 try:
@@ -37,43 +37,6 @@ ok = ["As you wish", "As you wish sir", "As you wish boss", "OK sir", "OK", "Yes
 def talk(audio):
 	engine.say(audio)
 	engine.runAndWait()
-
-def playSong():
-	f = open("songList.txt", 'r')
-	path = f.read()
-	f.close()
-	files=os.listdir(path)
-	song = path+random.choice(files)
-	pygame.mixer.music.load(song)
-	pygame.mixer.music.play(loops=0)
-
-global paused
-paused = False
-def pauseSong():
-	global paused
-	try:
-		if paused:
-			talk('Resuming...')
-			pygame.mixer.music.unpause()
-			paused = False
-		else:
-			talk('Pausing...')
-			pygame.mixer.music.pause()
-			paused = True
-	except:
-		pass
-
-global stoped
-stoped = False
-
-def stopSong():
-	try:
-		pygame.mixer.music.stop()
-		talk('Song stopped. Deactivating the music player.')
-		global stoped
-		stoped = True
-	except:
-		pass
 
 def upTime():
 	lib = ctypes.windll.kernel32
@@ -102,11 +65,13 @@ def take_screenshot():
 def takeCommand():
 	r = sr.Recognizer()
 	with sr.Microphone() as source:
+		PlaySound.playSound("media/sounds/listening.wav")
 		print("Listening")
 		audio = r.listen(source)
 		query = ""
 
 		try:
+			PlaySound.playSound("media/sounds/recognized.wav")
 			print("Recognizing...")
 			query = r.recognize_google(audio, language="en-IN")
 			print(f"User said: {query}")
