@@ -1,6 +1,9 @@
 # NIX-Assistant
 NIX is a voice assistant created to make your computer easier to use just simply giving a voice command.
 
+# Attension
+- You should update the songList.txt file with your songs folder file path
+
 ## Details
 > Language: Python (Python 3) <br>
 > Environment: Windows (Compatible for Linux Destros.) <br>
