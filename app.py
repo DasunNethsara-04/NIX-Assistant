@@ -27,44 +27,6 @@ engine.setProperty('volume', 2.0)
 engine.setProperty('voice', voice[2].id)
 
 
-
-'''			Background Animating			'''
-class AnimateGif(object):
-	def __init__(self, image):
-		self._frames = []
-		img = Image.open(image)
-		for frame in ImageSequence.Iterator(img):
-			photo = ImageTk.PhotoImage(frame)
-			photo.delay = frame.info['duration'] * 10
-			self._frames.append(photo)
-
-	def __len__(self):
-		return len(self._frames)
-	
-	def __getitem__(self, frame_num):
-		return self._frames[frame_num]
-	
-def update_label_image(label, ani_img, ms_delay, frame_num):
-	global cancel_id
-	label.configure(image=ani_img[frame_num])
-	frame_num = (frame_num + 1) % len(ani_img)
-	cancel_id = root.after(ms_delay, update_label_image, label, ani_img, ms_delay, frame_num)
-	
-def enable_animation():
-	global cancel_id
-	if cancel_id is None:
-		ms_delay = 5000 // len(ani_img)
-		cancel_id = root.after(ms_delay, update_label_image, animation, ani_img, ms_delay, 0)
-
-def cancel_animation():
-	global cancel_id
-	if cancel_id is not None:
-		root.after_cancel(cancel_id)
-		cancel_id = None
-
-'''------------------------------------------'''
-
-
 # reply methods
 try:
 	user = psutil.users()[0][0].split()[1]
@@ -458,7 +420,6 @@ def run():
 			os.startfile('C:\\Windows\\System32\\diskpart.exe')
 
 		# application
-
 		elif all([i in command for i in ['open', 'vlc', 'player']]):
 			try:
 				path = 'C:\\Program Files\\VideoLAN\\VLC\\vlc.exe'
@@ -508,9 +469,47 @@ def run():
 
 
 
+'''			Background Animating			'''
+class AnimateGif(object):
+	def __init__(self, image):
+		self._frames = []
+		img = Image.open(image)
+		for frame in ImageSequence.Iterator(img):
+			photo = ImageTk.PhotoImage(frame)
+			photo.delay = frame.info['duration'] * 10
+			self._frames.append(photo)
+
+	def __len__(self):
+		return len(self._frames)
+	
+	def __getitem__(self, frame_num):
+		return self._frames[frame_num]
+	
+def update_label_image(label, ani_img, ms_delay, frame_num):
+	global cancel_id
+	label.configure(image=ani_img[frame_num])
+	frame_num = (frame_num + 1) % len(ani_img)
+	cancel_id = root.after(ms_delay, update_label_image, label, ani_img, ms_delay, frame_num)
+	
+def enable_animation():
+	global cancel_id
+	if cancel_id is None:
+		ms_delay = 5000 // len(ani_img)
+		cancel_id = root.after(ms_delay, update_label_image, animation, ani_img, ms_delay, 0)
+
+def cancel_animation():
+	global cancel_id
+	if cancel_id is not None:
+		root.after_cancel(cancel_id)
+		cancel_id = None
+
+'''------------------------------------------'''
+
+
+
 root = Tk()
 root.title('NIX Assistant')
-#ico = root.iconbitmap('icon.ico')
+root.iconbitmap("media/imgs/NIX_logo.ico")
 root.resizable(0, 0)
 root.config(bg='black')
 
