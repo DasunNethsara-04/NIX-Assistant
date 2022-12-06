@@ -232,7 +232,7 @@ def run():
 				talk('Error creating PHP file')
 				pass
 
-		elif all([i in command for i in ['create', 'python', 'file']]):
+		elif all([i in command for i in ['create', 'javascript', 'file']]):
 			try:
 				talk(random.choice(ok) + ', Creating a JavaScript file.')
 				path = os.environ['USERPROFILE']+'\\Desktop'
