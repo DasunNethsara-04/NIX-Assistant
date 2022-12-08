@@ -244,6 +244,10 @@ def run():
 				talk('Error creating PHP file')
 				pass
 
+		elif "help" in command:
+			talk("Oh, I think now you're in trouble. So now I open my Help document. Please check it out.")
+			os.startfile('media\\help.pdf')
+
 		elif any([i in command for i in ['volume up', 'increase volume']]):
 			talk('Increasing volume')
 			pyautogui.press("volumeup")
@@ -493,6 +497,7 @@ def update_label_image(label, ani_img, ms_delay, frame_num):
 	
 def enable_animation():
 	global cancel_id
+	# global ret, image_names
 	if cancel_id is None:
 		ms_delay = 5000 // len(ani_img)
 		cancel_id = root.after(ms_delay, update_label_image, animation, ani_img, ms_delay, 0)
@@ -527,9 +532,7 @@ animation = Label(image=ani_img[0], bd=0)
 #animation.place(x=-110, y=-80)
 animation.pack()
 enable_animation()
-# while True:
-# 	run()
-#Button(root, text='OK', command=threading.Thread(target=run).start()).pack()
+
 t = 0
 def threadStart():
 	t = threading.Thread(target=run)
